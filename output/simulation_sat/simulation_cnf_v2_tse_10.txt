@@ -1,0 +1,1 @@
+size type  blanks  precomp  comp_time  postcomp
