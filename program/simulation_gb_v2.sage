@@ -4,20 +4,20 @@ load("binario_gb.sage")
 print '\n'
 
 #input random puzzle
-database_binario = load('puzzle_database_v2/binario_database_mat_v2.sobj')
+database_binario = load('../input/puzzle_database_v2/binario_database_mat_v2.sobj')
 try:
-    os.mkdir('simulation_gb')
+    os.mkdir('../output/simulation_gb')
 except Exception:
     pass
 
-for m in [2..6]:
-    filename='simulation_gb/simulation_gb_v2_'+str(m)+'.txt'
-    f = file(filename, 'w')
+for m in [3]:
+    filename='../output/simulation_gb/simulation_gb_v2_'+str(m)+'.txt'
+    f = file(filename, 'a')
     f.write('size type  blanks  precomp  comp_time status\n')
     f.close()
-    for blanks in  [1..(2*m)^2]:
+    for blanks in  [28..(2*m)^2]:
         for l in [1..6]:
-            for i in xrange(7):
+            for i in xrange(3):
                 Z0 = database_binario[m,l]
                 location_index = cartesian_product([Set(xrange((2*m))), Set(xrange((2*m)))])
                 set_of_blank_cell = Subsets(location_index,blanks)

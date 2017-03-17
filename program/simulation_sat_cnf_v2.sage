@@ -4,10 +4,10 @@ load("binario_sat_cnf.sage")
 print '\n'
 
 #input random puzzle
-database_binario = load('puzzle_database_v2/binario_database_mat_v2.sobj')
+database_binario = load('../input/puzzle_database_v2/binario_database_mat_v2.sobj')
 
-for m in [2..2]:
-    filename = 'simulation_sat/simulation_cnf_v2_'+str(m)+'.txt'
+for m in [2..3]:
+    filename = '../output/simulation_sat/simulation_cnf_v2_'+str(m)+'.txt'
     f = file(filename, 'w')
     f.write('size type  blanks  precomp  comp_time  postcomp\n')
     f.close()

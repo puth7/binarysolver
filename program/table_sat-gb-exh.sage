@@ -1,10 +1,10 @@
- reset() 
+reset() 
 # r.detach()
 # r.closeAllConnections()
 # r.rm()
 
 try:
-    os.mkdir('simulation_plots')
+    os.mkdir('../output/simulation_plots')
 except Exception:
   pass
 
@@ -24,12 +24,12 @@ except Exception:
 #   r.plot(x,y)
 #   r.dev_off()
 #######################################################
-list_m=[2]
+list_m=[3]
 ##GB
 gb={}
 for m in list_m:
   try:
-    f = file('simulation_gb/simulation_gb_v2_'+str(m)+'.txt','r')
+    f = file('../output/simulation_gb/simulation_gb_v2_'+str(m)+'.txt','r')
   except:
     continue
   for line in f:
@@ -48,7 +48,7 @@ for m in list_m:
 sat={}
 for m in list_m:
   try:
-    f = file('simulation_sat/simulation_cnf_v2_'+str(m)+'.txt','r')
+    f = file('../output/simulation_sat/simulation_cnf_v2_'+str(m)+'.txt','r')
   except:
     continue
   for line in f:
@@ -67,7 +67,7 @@ for m in list_m:
 sat_t={}
 for m in list_m:
   try:
-    f = file('simulation_sat/simulation_cnf_v2_tse_'+str(m)+'.txt','r')
+    f = file('../output/simulation_sat/simulation_cnf_v2_tse_'+str(m)+'.txt','r')
   except:
     continue
   for line in f:
@@ -86,7 +86,7 @@ for m in list_m:
 exh={}
 for m in list_m:
   try:
-      f = file('simulation_exh/simulation_exh_'+str(m)+'.txt','r')
+      f = file('../output/simulation_exh/simulation_exh_v2_allblnk_'+str(m)+'.txt','r')
   except:
       continue
   for line in f:
@@ -106,17 +106,32 @@ for m in list_m:
 sat_lst=[]
 exh_lst=[]
 gb_lst=[]
+sat_t_lst=[]
 for m in list_m:
   for blnk in [1..(2*m)^2]:
     try:
         exh_lst.append([blnk,mean(exh[m,blnk, 'time'])])
+    except:
+        pass
+    try:
         gb_lst.append([blnk,mean(gb[m,blnk, 'com_time'])])
+    except:
+        pass
+    try:
         sat_lst.append([blnk, mean(sat[m,blnk, 'com_time'])])
     except:
-        continue
+        pass
+    try:
+        sat_t_lst.append([blnk, mean(sat_t[m,blnk, 'com_time'])])
+    except:
+        pass
     
-
-g = file('simulation_plots/different_number_exp.txt','w')
+print str(exh_lst)
+print str(gb_lst)
+print str(sat_lst)
+print str(sat_t_lst)
+    
+g = file('../output/simulation_plots/different_number_exp.txt','w')
 g.write('x exh gb sat \n')
 for i in xrange(15):
     g.write(str(exh_lst[i][0])+' '+str(exh_lst[i][1])+' '+str(gb_lst[i][1])+' '+str(sat_lst[i][1])+'\n')

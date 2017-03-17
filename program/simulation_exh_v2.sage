@@ -3,22 +3,22 @@ load("binario_exh.sage")
 
 #Generate random puzzle ( not need to have unique solution)
 print '\n';
-database_binario = load('puzzle_database_v2/binario_database_mat_v2.sobj')
+database_binario = load('../input/puzzle_database_v2/binario_database_mat_v2.sobj')
 # database diambil dari binario_database_mat. load dari file
 
 try:
-    os.mkdir('simulation_exh')
+    os.mkdir('../output/simulation_exh')
 except Exception:
     pass
 
 for m in [2..3]:
-    filename = 'simulation_exh/simulation_exh_v2_allblnk_' + str(m) + '.txt'
+    filename = '../output/simulation_exh/simulation_exh_v2_allblnk_' + str(m) + '.txt'
     f=file(filename, 'w')
     f.write('size  blanks  time  guess  backtrack\n')
     f.close()
     for blanks in [1..(2*m)^2]:
         for l in [1..6]:
-            for i in xrange(7):
+            for i in xrange(3):
                 Z0 = database_binario[m,l]
                 location_index = cartesian_product([Set(xrange((2*m))), Set(xrange((2*m)))])
                 set_of_blank_cell = Subsets(location_index,blanks)

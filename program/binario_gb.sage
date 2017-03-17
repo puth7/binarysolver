@@ -16,9 +16,9 @@ def binpuzzle2mpolynomials(n, M, use_constraint3=True):
     var_names = [ "x_%s_%s" % (i, j) for i in xrange(n) for j in xrange(n) ]
     R = BooleanPolynomialRing(n**2, var_names, order="deglex")
     #set all known values
-    for m in M:
-        f = R("x_%s_%s" % (m[0], m[1])) + M[m]
-        F.append(f)
+    #for m in M:
+    #    f = R("x_%s_%s" % (m[0], m[1])) + M[m]
+    #    F.append(f)
     ###constraint 1
     def constraint1(x):
         x1, x2, x3 = x[0], x[1], x[2]
@@ -83,7 +83,9 @@ def binpuzzle2mpolynomials(n, M, use_constraint3=True):
             for j in xrange(i+1, n):
                 col_vars2 = [ R("x_%s_%s" % (k, j)) for k in xrange(n) ]
                 F.append( constraint3(V[:], col_vars1, col_vars2) )
-    return Sequence(F);
+    F = Sequence(F)
+    F = F.subs({R("x_%s_%s" % (k[0], k[1])) : v for k,v in M.iteritems()})
+    return F
 
 # puzzle yang tidak memiliki solusi
 # B0=matrix(GF(2),12)
